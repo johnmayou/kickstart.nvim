@@ -750,7 +750,19 @@ do
     --    https://github.com/mrcjkb/rustaceanvim
     --
     -- But for many setups, the LSP (`rust_analyzer`) will work just fine
-    rust_analyzer = {},
+    rust_analyzer = {
+      settings = {
+        ['rust-analyzer'] = {
+          -- Rustlings' Cargo.toml defines ~190 independent bin targets, and
+          -- most exercises are intentionally broken. Without --keep-going,
+          -- `cargo check` aborts at the first broken exercise it reaches and
+          -- never checks the rest, so diagnostics for later files go stale.
+          check = {
+            extraArgs = { '--keep-going' },
+          },
+        },
+      },
+    },
 
     stylua = {}, -- Used to format Lua code
 
