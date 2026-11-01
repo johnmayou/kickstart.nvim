@@ -251,6 +251,14 @@ do
     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
     callback = function() vim.hl.on_yank() end,
   })
+
+  -- Autosave on leaving insert mode
+  vim.api.nvim_create_autocmd('InsertLeave', {
+    desc = 'Autosave buffer',
+    group = vim.api.nvim_create_augroup('kickstart-autosave', { clear = true }),
+    pattern = '*',
+    command = 'silent! write',
+  })
 end
 
 -- ============================================================
